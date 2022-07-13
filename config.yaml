@@ -1,0 +1,4 @@
+params: 
+   app_name: 'mlops-sagemaker'
+   execution_role_arn: arn:aws:iam::374664354934:role/mlflow-roles
+   
