@@ -1,7 +1,6 @@
 import os
 import warnings
 import sys
-
 import pandas as pd
 import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
@@ -54,6 +53,7 @@ if __name__ == "__main__":
     alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
     l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
     
+    # mlflow.set_experiment("wine-quality-regression")
     uri= 'http://127.0.0.1:5000'
     mlflow.set_tracking_uri(uri)
     with mlflow.start_run():
@@ -92,9 +92,9 @@ if __name__ == "__main__":
 
         try:
             if input("Push Model To s3 (Y or N): ") == 'Y':
-                runs = os.path.join(from_root(), 'artifacts/')
+                runs = os.path.join(from_root(), 'artifacts')
                 print('path to artifacts Exist: ', os.path.exists(runs))
-                status = upload(s3_bucket_name='bucket-mlflow-1', mlruns_dir=runs)
+                status = upload(s3_bucket_name='mlflow-database', mlruns_dir=runs)
                 
 
                 # aws_config = os.path.join(from_root(), 'aws_configurations', 'aws_config.yaml')
